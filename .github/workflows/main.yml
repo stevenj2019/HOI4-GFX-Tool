@@ -12,10 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Get Release SHA
-      id: vars
-      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
     - name: Package Application - Windows
       uses: JackMcKew/pyinstaller-action-windows@main
       with:
@@ -28,6 +24,7 @@ jobs:
         path: src/dist/windows
 
   release:
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: write
