@@ -19,7 +19,7 @@ jobs:
         path: src
 
     - name: Upload Artifact - Windows
-    - uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v4
       with:
         name: GFXManager
         path: src/dist/windows
