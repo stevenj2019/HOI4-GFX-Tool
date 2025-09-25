@@ -1,0 +1,6 @@
+SpriteTypes = { 
+    {% for sprite in sprite_array %}SpriteType = {
+        name = "{{sprite['name']}}"
+        texturefile = "{{sprite['texturefile']}}" 
+    }
+    {% endfor %}}
