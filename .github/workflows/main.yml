@@ -17,6 +17,7 @@ jobs:
     - name: Get Release SHA
       id: vars
       run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
     - name: Package Application - Windows
       uses: JackMcKew/pyinstaller-action-windows@main
       with:
@@ -27,6 +28,11 @@ jobs:
       with:
         name: GFXManager
         path: src/dist/windows
+
+  release:
+    - name: Get Release SHA
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
     - name: Create Release
       id: create_release
