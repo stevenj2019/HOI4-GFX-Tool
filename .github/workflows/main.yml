@@ -9,8 +9,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v4
+
+    - name: Get Release SHA
+      id: vars
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
     - name: Package Application - Windows
       uses: JackMcKew/pyinstaller-action-windows@main
@@ -22,16 +28,6 @@ jobs:
       with:
         name: GFXManager
         path: src/dist/windows
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-    - name: Get Release SHA
-      id: vars
-      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
     - name: Create Release
       id: create_release
@@ -54,3 +50,4 @@ jobs:
         asset_path: src/dist/windows/GFXManager.exe
         asset_name: GFXManager.exe
         asset_content_type: application/vnd.microsoft.portable-executable
+
